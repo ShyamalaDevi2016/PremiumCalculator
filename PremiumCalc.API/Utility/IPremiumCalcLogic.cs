@@ -7,6 +7,6 @@ namespace PremiumCalc.API.Utility
 {
     public interface IPremiumCalcLogic
     {
-        decimal MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, int Age);
+        double MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, int Age);
     }
 }

@@ -21,39 +21,22 @@ namespace PremiumCalc.Services
             return objDBContext.OccupationRating;
         }
 
-        public decimal GetRatingFactorForOccupation(int OccupationId)
+        public double GetRatingFactorForOccupation(int OccupationId)
         {
 
-            if (OccupationId > 0)
-            {
+
                 var IQueryFactor = from occ in objDBContext.OccupationRating
                                    join rm in objDBContext.RatingMaster on occ.RatingId equals rm.RatingId
                                    where occ.OccupationId == OccupationId
                                    select rm.Factor;
 
-                return IQueryFactor.SingleOrDefault<decimal>();
-            }
-            else
-                throw new Exception("Invalid Occupation Id");
+                return IQueryFactor.SingleOrDefault<double>();
+
           
             
-           //select new {rm.Factor};
 
-
-           //decimal RatingFactor = (decimal)objFactor;
         }
 
-        //public decimal MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, int Age)
-        //{
 
-        //    decimal OccRatingFactor = GetRatingFactorForOccupation(OccupationId);
-
-
-        //    decimal MonthlyPreminumAmt = (DeathCoverAmt * OccRatingFactor * Age) / 1000 * 12;
-
-        //    return MonthlyPreminumAmt;
-
-
-        //}
     }
 }

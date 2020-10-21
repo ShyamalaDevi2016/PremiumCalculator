@@ -13,14 +13,14 @@ namespace PremiumCalc.API.Utility
             objPremiumCalcService = _objPremiumCalcService;
         }
 
-        public decimal MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, int Age)
+        public double MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, int Age)
         {
             try
             {
-                decimal OccRatingFactor = objPremiumCalcService.GetRatingFactorForOccupation(OccupationId);
+                double OccRatingFactor = objPremiumCalcService.GetRatingFactorForOccupation(OccupationId);
 
 
-                decimal MonthlyPreminumAmt = (DeathCoverAmt * OccRatingFactor * Age) / 1000 * 12;
+                double MonthlyPreminumAmt = (DeathCoverAmt * OccRatingFactor * Age) / 1000 * 12;
 
                 return MonthlyPreminumAmt;
             }

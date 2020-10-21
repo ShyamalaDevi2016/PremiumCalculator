@@ -10,7 +10,7 @@ namespace PremiumCalc.Services
     {
       IEnumerable<OccupationRating> GetAllOccupations(); 
 
-      decimal  GetRatingFactorForOccupation(int OccupationId);
+      double  GetRatingFactorForOccupation(int OccupationId);
 
      
     }

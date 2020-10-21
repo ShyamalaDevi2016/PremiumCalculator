@@ -12,7 +12,7 @@ namespace PremiumCalc.Services.Models
 
         public int RatingId { get; set; }
         public string RatingName { get; set; }
-        public decimal Factor { get; set; }
+        public double Factor { get; set; }
 
         public ICollection<OccupationRating> OccupationRating { get; set; }
     }
