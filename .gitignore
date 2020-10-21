@@ -3,3 +3,9 @@
 ################################################################################
 
 /.vs/PremiumCalc/v15/Server/sqlite3
+/PremiumCalc.API/bin/Debug/netcoreapp2.1
+/PremiumCalc.API/obj
+/PremiumCalc.Services/bin/Debug/netcoreapp2.1
+/PremiumCalc.Services/obj
+/PremiumCalc.UnitTests/bin/Debug/netcoreapp2.1
+/PremiumCalc.UnitTests/obj
