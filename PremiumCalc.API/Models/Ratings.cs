@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PremiumCalc.API.Models
 {
-    public partial class Rating
+    public partial class Ratings
     {
 
 

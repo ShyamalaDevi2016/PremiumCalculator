@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PremiumCalc.API.Models
 {
-    public partial class Occupation
+    public partial class Occupations
     {
        
         public int OccupationId { get; set; }

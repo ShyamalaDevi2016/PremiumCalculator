@@ -11,8 +11,8 @@ namespace PremiumCalc.API.Mapper
     {
         public PremiumCalcProfile()
         {
-            CreateMap<OccupationRating, Occupation>();
-            CreateMap<RatingMaster, Rating>();
+            CreateMap<OccupationRating, Occupations>();
+            CreateMap<RatingMaster, Ratings>();
         }
     }
 }

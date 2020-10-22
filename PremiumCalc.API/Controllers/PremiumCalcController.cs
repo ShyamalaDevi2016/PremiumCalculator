@@ -33,7 +33,7 @@ namespace PremiumCalc.API.Controllers
         [Route("Occupations")]
         public IActionResult GetAllOccupations()
         {
-            return Ok(objMapper.Map<List<Occupation>>(objPremiumService.GetAllOccupations()));
+            return Ok(objMapper.Map<List<Occupations>>(objPremiumService.GetAllOccupations()));
         }
 
 
