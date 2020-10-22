@@ -8,15 +8,21 @@ namespace PremiumCalc.API.Utility
     public class PremiumCalcLogic : IPremiumCalcLogic
     {
         private readonly IPremiumCalcService objPremiumCalcService;
+        int Age;
         public PremiumCalcLogic(IPremiumCalcService _objPremiumCalcService)
         {
             objPremiumCalcService = _objPremiumCalcService;
         }
 
-        public double MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, int Age)
+        public double MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, DateTime DOB)
         {
             try
             {
+               
+                Age = DateTime.Now.Year - DOB.Year;
+                if (DateTime.Now.DayOfYear < DOB.DayOfYear)
+                    Age = Age - 1;
+
                 double OccRatingFactor = objPremiumCalcService.GetRatingFactorForOccupation(OccupationId);
 
 

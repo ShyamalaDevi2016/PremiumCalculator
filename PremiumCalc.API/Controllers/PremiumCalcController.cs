@@ -10,6 +10,7 @@ using AutoMapper;
 using PremiumCalc.API.Request;
 using PremiumCalc.Infra;
 using PremiumCalc.API.Response;
+using System.Globalization;
 
 namespace PremiumCalc.API.Controllers
 {
@@ -54,8 +55,11 @@ namespace PremiumCalc.API.Controllers
         {
            
             _logger.LogInfo("MonthlyPremiumCalculator method executing");
+
+
+
             PremiumCalcResponse premiumCalcResponse = new PremiumCalcResponse();
-            premiumCalcResponse.MonthlyPremiumAmout = objPremiumLogic.MonthlyPremiumCalcForUser(request.DeathCoverAmt, request.OccupationId, request.Age);
+            premiumCalcResponse.MonthlyPremiumAmout = objPremiumLogic.MonthlyPremiumCalcForUser(request.DeathCoverAmt, request.OccupationId, request.DOB);
             _logger.LogInfo("MonthlyPremiumCalculator method executed");
             return Ok(premiumCalcResponse);
         }
