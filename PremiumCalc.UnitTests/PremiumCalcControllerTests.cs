@@ -12,6 +12,9 @@ using AutoFixture;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using PremiumCalc.API.Models;
+using PremiumCalc.Infra;
+using PremiumCalc.API.Request;
+
 namespace PremiumCalc.UnitTests
 {
     public class PremiumCalcControllerTests
@@ -34,10 +37,11 @@ namespace PremiumCalc.UnitTests
                 opts.AddProfile<PremiumCalcProfile>();
             });
             var mapper = config.CreateMapper();
+            var logger = new LoggerManager();
 
             objPremiumService = new Mock<IPremiumCalcService>();
             objPremiumLogic = new Mock<IPremiumCalcLogic>();
-            objController = new PremiumCalcController(objPremiumService.Object, objPremiumLogic.Object, mapper);
+            objController = new PremiumCalcController(objPremiumService.Object, objPremiumLogic.Object, mapper, logger);
         }
 
 
@@ -61,16 +65,17 @@ namespace PremiumCalc.UnitTests
         [Test]
         public void MonthlyPremiumCalculator_Test()
         {
-            int OccupationId = 1;
-            int DeathCoverAmt = 2400;
-            int Age = 30;
+            PremiumCalcRequest request = new PremiumCalcRequest();
+            request.OccupationId = 1;
+            request.DeathCoverAmt = 2400;
+            request.Age = 30;
             double RatingFactor = 1.75;
 
-            var TestResult = (2400 * RatingFactor * Age) / 1000 * 12;
+            var TestResult = (2400 * RatingFactor * request.Age) / 1000 * 12;
 
-            objPremiumLogic.Setup(x => x.MonthlyPremiumCalcForUser(It.Is<int>(u => u.Equals(DeathCoverAmt)), It.Is<int>(u => u.Equals(OccupationId)), It.Is<int>(u => u.Equals(Age)))).Returns(TestResult);
+            objPremiumLogic.Setup(x => x.MonthlyPremiumCalcForUser(It.Is<int>(u => u.Equals(request.DeathCoverAmt)), It.Is<int>(u => u.Equals(request.OccupationId)), It.Is<int>(u => u.Equals(request.Age)))).Returns(TestResult);
 
-            var okResult = objController.MonthlyPremiumCalculator(DeathCoverAmt, OccupationId, Age) as OkObjectResult;
+            var okResult = objController.MonthlyPremiumCalculator(request) as OkObjectResult;
             var apiResult = okResult.Value;
 
             Assert.IsNotNull(apiResult);

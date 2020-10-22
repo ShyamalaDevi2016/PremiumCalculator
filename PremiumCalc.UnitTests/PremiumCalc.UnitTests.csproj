@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PremiumCalc.API\PremiumCalc.API.csproj" />
+    <ProjectReference Include="..\PremiumCalc.Infra\PremiumCalc.Infra.csproj" />
     <ProjectReference Include="..\PremiumCalc.Services\PremiumCalc.Services.csproj" />
   </ItemGroup>
 

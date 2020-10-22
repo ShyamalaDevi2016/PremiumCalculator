@@ -7,7 +7,9 @@ using PremiumCalc.Services;
 using PremiumCalc.API.Models;
 using PremiumCalc.API.Utility;
 using AutoMapper;
-
+using PremiumCalc.API.Request;
+using PremiumCalc.Infra;
+using PremiumCalc.API.Response;
 
 namespace PremiumCalc.API.Controllers
 {
@@ -19,12 +21,15 @@ namespace PremiumCalc.API.Controllers
         private readonly IPremiumCalcService objPremiumService;
         private readonly IPremiumCalcLogic objPremiumLogic;
         private readonly IMapper objMapper;
+        private readonly ILoggerManager _logger;
 
-        public PremiumCalcController(IPremiumCalcService _objPremiumService, IPremiumCalcLogic _objPremiumLogic, IMapper _objMapper)
+        public PremiumCalcController(IPremiumCalcService _objPremiumService, IPremiumCalcLogic _objPremiumLogic, 
+            IMapper _objMapper, ILoggerManager logger)
         {
             objPremiumService = _objPremiumService;
             objPremiumLogic = _objPremiumLogic;
             objMapper = _objMapper;
+            _logger = logger;
         }
 
 
@@ -33,27 +38,26 @@ namespace PremiumCalc.API.Controllers
         [Route("Occupations")]
         public IActionResult GetAllOccupations()
         {
-            return Ok(objMapper.Map<List<Occupations>>(objPremiumService.GetAllOccupations()));
+       
+            _logger.LogInfo("GetAllOccupations method executing");
+            OccupationResponse occupationResponse = new OccupationResponse();
+            occupationResponse.Occupations = objMapper.Map<List<Occupations>>(objPremiumService.GetAllOccupations());
+            _logger.LogInfo("GetAllOccupations method executed");
+            return Ok(occupationResponse);
+            
         }
 
 
-        [HttpGet]
-        [Route("MonthlyPremiumCalculator/{DeathCoverAmt}/{OccupationId}/{Age}")]
-        public IActionResult MonthlyPremiumCalculator(int DeathCoverAmt, int OccupationId, int Age)
+        [HttpPost]
+        [Route("MonthlyPremiumCalculator")]
+        public IActionResult MonthlyPremiumCalculator(PremiumCalcRequest request)
         {
-            try
-            {
-                if(OccupationId == 0)
-                     return UnprocessableEntity("Occupation Id is not valid");
-
-                var PremiumAmt = objPremiumLogic.MonthlyPremiumCalcForUser(DeathCoverAmt, OccupationId, Age);
-
-                return Ok(PremiumAmt);
-            }
-            catch(Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+           
+            _logger.LogInfo("MonthlyPremiumCalculator method executing");
+            PremiumCalcResponse premiumCalcResponse = new PremiumCalcResponse();
+            premiumCalcResponse.MonthlyPremiumAmout = objPremiumLogic.MonthlyPremiumCalcForUser(request.DeathCoverAmt, request.OccupationId, request.Age);
+            _logger.LogInfo("MonthlyPremiumCalculator method executed");
+            return Ok(premiumCalcResponse);
         }
 
     }

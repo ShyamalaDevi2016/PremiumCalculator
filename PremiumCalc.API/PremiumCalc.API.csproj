@@ -5,7 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="nlog.config" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="nlog.config" />
   </ItemGroup>
 
   <ItemGroup>
@@ -22,6 +30,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PremiumCalc.Infra\PremiumCalc.Infra.csproj" />
     <ProjectReference Include="..\PremiumCalc.Services\PremiumCalc.Services.csproj" />
   </ItemGroup>
 
