@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using PremiumCalc.API.Models;
 using PremiumCalc.Infra;
 using PremiumCalc.API.Request;
+using PremiumCalc.API.Response;
 
 namespace PremiumCalc.UnitTests
 {
@@ -54,11 +55,11 @@ namespace PremiumCalc.UnitTests
             objPremiumService.Setup(x => x.GetAllOccupations()).Returns(Occupations);
 
             var okResult = objController.GetAllOccupations() as OkObjectResult;
-            var apiResult = okResult.Value as List<Occupations>;
+            var apiResult = okResult.Value as OccupationResponse;
 
             Assert.IsNotNull(apiResult);
-            Assert.IsTrue(apiResult.Count == 4);
-            Assert.AreEqual(Occupations.First().OccupationName, apiResult.First().OccupationName);
+            Assert.IsTrue(apiResult.Occupations.Count == 4);
+            Assert.AreEqual(Occupations.First().OccupationName, apiResult.Occupations.First().OccupationName);
         }
 
 
@@ -68,18 +69,20 @@ namespace PremiumCalc.UnitTests
             PremiumCalcRequest request = new PremiumCalcRequest();
             request.OccupationId = 1;
             request.DeathCoverAmt = 2400;
-            request.Age = 30;
+            request.DOB = DateTime.Parse("10/22/1992");
             double RatingFactor = 1.75;
 
-            var TestResult = (2400 * RatingFactor * request.Age) / 1000 * 12;
+            int Age = Utility.ReturnAge(request.DOB);
 
-            objPremiumLogic.Setup(x => x.MonthlyPremiumCalcForUser(It.Is<int>(u => u.Equals(request.DeathCoverAmt)), It.Is<int>(u => u.Equals(request.OccupationId)), It.Is<int>(u => u.Equals(request.Age)))).Returns(TestResult);
+            var TestResult = (2400 * RatingFactor * Age) / 1000 * 12;
+
+            objPremiumLogic.Setup(x => x.MonthlyPremiumCalcForUser(It.Is<int>(u => u.Equals(request.DeathCoverAmt)), It.Is<int>(u => u.Equals(request.OccupationId)), It.Is<DateTime>(u => u.Equals(request.DOB)))).Returns(TestResult);
 
             var okResult = objController.MonthlyPremiumCalculator(request) as OkObjectResult;
-            var apiResult = okResult.Value;
+            var apiResult = okResult.Value as PremiumCalcResponse;
 
-            Assert.IsNotNull(apiResult);
-            Assert.AreEqual(TestResult, apiResult);
+            Assert.IsNotNull(apiResult.MonthlyPremiumAmout);
+            Assert.AreEqual(TestResult, apiResult.MonthlyPremiumAmout);
 
         }
 

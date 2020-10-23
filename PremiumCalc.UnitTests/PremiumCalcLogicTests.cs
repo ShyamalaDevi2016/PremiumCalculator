@@ -31,15 +31,17 @@ namespace PremiumCalc.UnitTests
         {
             int OccupationId = 1;
             int DeathCoverAmt = 2400;
-            int Age = 30;
+            DateTime DOB = DateTime.Parse("10/22/1992");
             double RatingFactor = 1.75;
-           
+            int Age = Utility.ReturnAge(DOB);
+
+
             objIPremiumLogic.Setup(x => x.GetRatingFactorForOccupation(It.Is<int>(u => u.Equals(OccupationId)))).Returns(RatingFactor);
 
             var TestResult = (2400 * RatingFactor * Age) / 1000 * 12;
 
 
-            var result = objPremiumLogic.MonthlyPremiumCalcForUser(DeathCoverAmt, OccupationId, Age);
+            var result = objPremiumLogic.MonthlyPremiumCalcForUser(DeathCoverAmt, OccupationId, DOB);
 
             Assert.IsNotNull(result);
             Assert.AreEqual(TestResult, result);

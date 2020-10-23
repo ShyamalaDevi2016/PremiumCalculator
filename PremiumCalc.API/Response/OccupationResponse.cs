@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PremiumCalc.API.Response
 {
+    /// <summary>
+    /// Response class for Occupation list
+    /// </summary>
     public class OccupationResponse
     {
         public List<Occupations> Occupations { get; set; } = new List<Occupations>();

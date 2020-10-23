@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace PremiumCalc.API.Models
 {
+    /// <summary>
+    ///model for exception handler
+    /// </summary>
     public class ErrorDetails
     {
         public int StatusCode { get; set; }

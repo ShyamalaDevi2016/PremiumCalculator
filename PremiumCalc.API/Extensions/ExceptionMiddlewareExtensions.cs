@@ -11,8 +11,14 @@ using System.Threading.Tasks;
 
 namespace PremiumCalc.API.Extensions
 {
+    /// <summary>
+    ///Class to handle exception
+    /// </summary>
     public static class ExceptionMiddlewareExtensions
     {
+        /// <summary>
+        ///Extension method to handle exception and to log the error
+        /// </summary>
         public static void ConfigureExceptionHandler(this IApplicationBuilder app, ILoggerManager loggerManager)
         {
             app.UseExceptionHandler(appError =>
@@ -25,7 +31,9 @@ namespace PremiumCalc.API.Extensions
                     var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
                     if (contextFeature != null)
                     {
+                        //Logging the error
                         loggerManager.LogError($"Error Occured: {contextFeature.Error}");
+                        //Sending error details response
                         await context.Response.WriteAsync(new ErrorDetails
                         {
                             StatusCode = context.Response.StatusCode,

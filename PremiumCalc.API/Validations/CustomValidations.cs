@@ -6,7 +6,9 @@ using System.Web;
 
 namespace PremiumCalc.API.Validations
 {
-
+    /// <summary>
+    ///custom validator class to check the DOB is not future date
+    /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
     public sealed class DOBValidation : ValidationAttribute
     {
@@ -27,6 +29,9 @@ namespace PremiumCalc.API.Validations
 
     }
 
+    /// <summary>
+    ///custom validator class to check the minimum age is 18 based on DOB
+    /// </summary>
     public sealed class DOBMinAgeValidation : ValidationAttribute
     {
         public int MinimumAge { get; }

@@ -6,11 +6,22 @@ using PremiumCalc.Services.Models;
 
 namespace PremiumCalc.Services
 {
-   public interface IPremiumCalcService
+    /// <summary>
+    ///Interface for the Premium Calculator 
+    /// </summary>
+    public interface IPremiumCalcService
     {
-      IEnumerable<OccupationRating> GetAllOccupations(); 
+        /// <summary>
+        /// Get all the available occupations  
+        /// </summary>
+        /// <returns>IEnumerable<OccupationRating></returns>
+        IEnumerable<OccupationRating> GetAllOccupations();
 
-      double  GetRatingFactorForOccupation(int OccupationId);
+        /// <summary>
+        /// Get the rating factor for the selected occupation
+        /// </summary>
+        /// <returns>double</returns>
+        double GetRatingFactorForOccupation(int OccupationId);
 
      
     }

@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 using PremiumCalc.API.Validations;
 namespace PremiumCalc.API.Request
 {
+    /// <summary>
+   /// Request class for premium calculator
+   /// </summary>
     public class PremiumCalcRequest
     {
         [Required]
         public string UserName { get; set; }
 
         [Required]
-        [DOBMinAgeValidation(18)]
+        [DOBMinAgeValidation(18)]//Minimum age for premium calculation is 18(Because, occupation can't be assigned for age less than 18)
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{MM/dd/yyyy}", ApplyFormatInEditMode = true)]
         [DOBValidation(ErrorMessage = "Date of birth cannot be greater than current date")]
         public System.DateTime DOB { get; set; }

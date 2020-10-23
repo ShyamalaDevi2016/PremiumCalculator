@@ -56,6 +56,7 @@ namespace PremiumCalc.API
             {
                 app.UseDeveloperExceptionPage();
             }
+            //Extension method to handle exception
             app.ConfigureExceptionHandler(loggerManager);
             app.UseMvc();
         }

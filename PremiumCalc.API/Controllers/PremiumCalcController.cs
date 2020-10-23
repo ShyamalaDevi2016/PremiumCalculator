@@ -24,6 +24,13 @@ namespace PremiumCalc.API.Controllers
         private readonly IMapper objMapper;
         private readonly ILoggerManager _logger;
 
+        /// <summary>
+        /// api controller constructor
+        /// </summary>
+        /// <param name="_objPremiumService">service object</param>
+        /// <param name="_objPremiumLogic">premium calculator logic object</param>
+        /// <param name="_objMapper">Automapper</param>
+        /// <param name="logger">loggerManager object</param>
         public PremiumCalcController(IPremiumCalcService _objPremiumService, IPremiumCalcLogic _objPremiumLogic, 
             IMapper _objMapper, ILoggerManager logger)
         {
@@ -34,7 +41,10 @@ namespace PremiumCalc.API.Controllers
         }
 
 
-        // GET api/values
+        /// <summary>
+        /// Gets all the available occupations in the system
+        /// </summary>
+        /// <returns><List<Occupations></returns>
         [HttpGet]
         [Route("Occupations")]
         public IActionResult GetAllOccupations()
@@ -48,15 +58,16 @@ namespace PremiumCalc.API.Controllers
             
         }
 
-
+        /// <summary>
+        /// Calculate monthly premium amount
+        /// </summary>
+        /// <param name="request">user info</param>
         [HttpPost]
         [Route("MonthlyPremiumCalculator")]
         public IActionResult MonthlyPremiumCalculator(PremiumCalcRequest request)
         {
            
             _logger.LogInfo("MonthlyPremiumCalculator method executing");
-
-
 
             PremiumCalcResponse premiumCalcResponse = new PremiumCalcResponse();
             premiumCalcResponse.MonthlyPremiumAmout = objPremiumLogic.MonthlyPremiumCalcForUser(request.DeathCoverAmt, request.OccupationId, request.DOB);

@@ -1,6 +1,5 @@
 C:\Shyamala\TAL\PremiumCalc\PremiumCalc.Infra\bin\Debug\netcoreapp2.1\PremiumCalc.Infra.deps.json
 C:\Shyamala\TAL\PremiumCalc\PremiumCalc.Infra\bin\Debug\netcoreapp2.1\PremiumCalc.Infra.dll
-C:\Shyamala\TAL\PremiumCalc\PremiumCalc.Infra\obj\Debug\netcoreapp2.1\PremiumCalc.Infra.csprojAssemblyReference.cache
 C:\Shyamala\TAL\PremiumCalc\PremiumCalc.Infra\obj\Debug\netcoreapp2.1\PremiumCalc.Infra.csproj.CoreCompileInputs.cache
 C:\Shyamala\TAL\PremiumCalc\PremiumCalc.Infra\obj\Debug\netcoreapp2.1\PremiumCalc.Infra.AssemblyInfoInputs.cache
 C:\Shyamala\TAL\PremiumCalc\PremiumCalc.Infra\obj\Debug\netcoreapp2.1\PremiumCalc.Infra.AssemblyInfo.cs

@@ -7,6 +7,9 @@ using PremiumCalc.Services.Models;
 
 namespace PremiumCalc.Services
 {
+    /// <summary>
+    /// Interface implementation using DB context for the premium calculator
+    /// </summary>
     public class PremiumCalculator : IPremiumCalcService
     {
         private readonly DBContext.DBContext objDBContext;

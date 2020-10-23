@@ -3,8 +3,10 @@ using System;
 
 namespace PremiumCalc.Infra
 {
-   
-        public interface ILoggerManager
+    /// <summary>
+    ///Interface to manage log using Nlog package
+    /// </summary>
+    public interface ILoggerManager
         {
             void LogInfo(string message);
             void LogWarn(string message);
@@ -14,6 +16,7 @@ namespace PremiumCalc.Infra
 
         public class LoggerManager : ILoggerManager
         {
+
             private static ILogger logger = LogManager.GetCurrentClassLogger();
 
             public void LogDebug(string message)
