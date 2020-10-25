@@ -1,0 +1,60 @@
+<div class="jumbtron">
+  <h1 class="display-4 text-center">Monthly Premium Calculator</h1>
+  <hr>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-5">
+      <form #form="ngForm" autocomplete="off">
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-white">
+                <i class="fas fa-user-circle" [class.green-icon]="UserName.valid"
+                  [class.red-icon]="UserName.invalid && UserName.touched"></i>
+              </div>
+            </div>
+            <input name="UserName" #UserName="ngModel" [(ngModel)]="service.formData.UserName" class="form-control"
+              placeholder="Enter User Name" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <input class="form-control" placeholder="Enter Date Of Birth" [readonly]="true" name="dp" [(ngModel)]="DOB"
+              ngbDatepicker #d="ngbDatepicker" required>
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-white">
+                <i class="fas fa-user-circle" [class.green-icon]="DeathCoverAmt.valid"
+                  [class.red-icon]="DeathCoverAmt.invalid && DeathCoverAmt.touched"></i>
+              </div>
+            </div>
+            <input type="number" name="DeathCoverAmt" #DeathCoverAmt="ngModel"
+              [(ngModel)]="service.formData.DeathCoverAmt" class="form-control" placeholder="Enter Death Cover Amount"
+              required>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text bg-white">
+                <i class="fas fa-user-circle"></i>
+              </div>
+            </div>
+            <select (change)="onSelect($event.target.value)" class="form-control">
+              <option value="undefined">Please select occupation</option>
+              <option *ngFor="let occupation of occupations" [value]="occupation.occupationId">
+                {{occupation.occupationName}}</option>
+            </select>
+          </div>
+        </div>
+      </form>      
+      <div *ngIf="MonthlyPremiumAmt"><strong>MonthlyPremium={{MonthlyPremiumAmt}}</strong></div>      
+    </div>
+  </div>
+</div>
