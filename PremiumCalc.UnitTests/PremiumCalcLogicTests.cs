@@ -38,7 +38,7 @@ namespace PremiumCalc.UnitTests
 
             objIPremiumLogic.Setup(x => x.GetRatingFactorForOccupation(It.Is<int>(u => u.Equals(OccupationId)))).Returns(RatingFactor);
 
-            var TestResult = (2400 * RatingFactor * Age) / 1000 * 12;
+            var TestResult =Math.Round( (2400 * RatingFactor * Age) / 1000 * 12,2);
 
 
             var result = objPremiumLogic.MonthlyPremiumCalcForUser(DeathCoverAmt, OccupationId, DOB);

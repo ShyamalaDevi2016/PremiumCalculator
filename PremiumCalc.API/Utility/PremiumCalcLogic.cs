@@ -33,7 +33,7 @@ namespace PremiumCalc.API.Utility
                 double OccRatingFactor = objPremiumCalcService.GetRatingFactorForOccupation(OccupationId);
 
 
-                double MonthlyPreminumAmt = (DeathCoverAmt * OccRatingFactor * Age) / 1000 * 12;
+                double MonthlyPreminumAmt =Math.Round( (DeathCoverAmt * OccRatingFactor * Age) / 1000 * 12,2);
 
                 return MonthlyPreminumAmt;
             }

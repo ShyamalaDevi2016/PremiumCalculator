@@ -19,6 +19,7 @@ using NLog;
 using System.IO;
 using PremiumCalc.Infra;
 using PremiumCalc.API.Extensions;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace PremiumCalc.API
 {
@@ -40,6 +41,19 @@ namespace PremiumCalc.API
 
             services.AddDbContext<DBContext>(options =>
                options.UseSqlServer(Configuration.GetConnectionString("TAL_DBConn")));
+
+            // Add Cors
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new CorsAuthorizationFilterFactory("MyPolicy"));
+            });
 
             services.AddTransient<IPremiumCalcService, PremiumCalculator>();
             services.AddTransient<IPremiumCalcLogic, PremiumCalcLogic>();
