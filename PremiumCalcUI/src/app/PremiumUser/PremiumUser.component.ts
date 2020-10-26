@@ -57,7 +57,10 @@ this.maxDate={year: this.now.getFullYear(), month: this.now.getMonth()+1, day: t
   GetPremiumAmt() {
     this.service.MonthlyPremiumCalc().subscribe(
       (res: any) => {
+        if(!Number.isInteger(res.monthlyPremiumAmout))
         this.MonthlyPremiumAmt =' $' + res.monthlyPremiumAmout + ' cents';
+        else
+        this.MonthlyPremiumAmt =' $' + res.monthlyPremiumAmout
       },
       err => {
         this.MonthlyPremiumAmt = null;
