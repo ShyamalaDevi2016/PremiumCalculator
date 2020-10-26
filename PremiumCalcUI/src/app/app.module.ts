@@ -3,13 +3,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from "@angular/forms";
 import { HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbDateAdapter, NgbDateParserFormatter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
  
 import { ToastrModule } from 'ngx-toastr';
 import { AppComponent } from './app.component';
 import { PremiumUserComp } from './PremiumUser/PremiumUser.component';
 
 import { PremiumCalcService } from "./shared/PremiumCalc.service"
+import { CustomAdapter, CustomDateParserFormatter } from './NgbDateCustomParserFormatter';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,9 @@ import { PremiumCalcService } from "./shared/PremiumCalc.service"
     BrowserAnimationsModule,
     ToastrModule.forRoot()
   ],
-  providers: [PremiumCalcService],
+  providers: [PremiumCalcService,
+    {provide: NgbDateAdapter, useClass: CustomAdapter},
+    {provide: NgbDateParserFormatter, useClass: CustomDateParserFormatter}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -14,27 +14,33 @@
               </div>
             </div>
             <input name="UserName" #UserName="ngModel" [(ngModel)]="service.formData.UserName" class="form-control"
-              placeholder="Enter User Name" required>
+              placeholder="Enter Person Name To Be Insured" required>
           </div>
         </div>
         <div class="form-group">
           <div class="input-group">
             <input class="form-control" placeholder="Enter Date Of Birth" [readonly]="true" name="dp" [(ngModel)]="DOB"
-              ngbDatepicker #d="ngbDatepicker" required>
+              ngbDatepicker #d="ngbDatepicker"  [minDate]="{year: 1900, month: 1, day: 1}" [maxDate] = "maxDate" required>
             <div class="input-group-append">
               <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
             </div>
           </div>
         </div>
+
+        <div class="form-group">
+          <div class="input-group" style="font-size: 10px;color: blue; ">
+              <label>(Note : Minimum age should be 18)</label>  
+            </div>
+      </div>
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text bg-white">
-                <i class="fas fa-user-circle" [class.green-icon]="DeathCoverAmt.valid"
+                <i class="fas fa-dollar-sign" [class.green-icon]="DeathCoverAmt.valid"
                   [class.red-icon]="DeathCoverAmt.invalid && DeathCoverAmt.touched"></i>
               </div>
             </div>
-            <input type="number" name="DeathCoverAmt" #DeathCoverAmt="ngModel"
+            <input type="number"  name="DeathCoverAmt" #DeathCoverAmt="ngModel"
               [(ngModel)]="service.formData.DeathCoverAmt" class="form-control" placeholder="Enter Death Cover Amount"
               required>
           </div>
@@ -43,7 +49,7 @@
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text bg-white">
-                <i class="fas fa-user-circle"></i>
+                <i class="fas fa-user-md"></i>
               </div>
             </div>
             <select (change)="onSelect($event.target.value)" class="form-control">
@@ -53,8 +59,17 @@
             </select>
           </div>
         </div>
+
+        <div class="form-group">
+          <div class="input-group">
+
+            <div style="color: blue;"><strong>Monthly Premium Amount:{{MonthlyPremiumAmt}}</strong></div>   
+          </div>
+        </div>
+
+        
       </form>      
-      <div *ngIf="MonthlyPremiumAmt"><strong>MonthlyPremium={{MonthlyPremiumAmt}}</strong></div>      
+    
     </div>
   </div>
 </div>

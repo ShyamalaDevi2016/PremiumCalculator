@@ -4,6 +4,8 @@ import { PremiumCalcService } from "../shared/PremiumCalc.service"
 import { Occupation } from "../shared/UserInfo.model";
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
+
 
 @Component({
   selector: 'user-details',
@@ -14,18 +16,21 @@ import { ToastrService } from 'ngx-toastr';
 export class PremiumUserComp implements OnInit {
   occupations: Occupation[];
   selectedOccupation: Occupation;
-  MonthlyPremiumAmt: number;
+  MonthlyPremiumAmt: string;
   ErrorTitle: string = 'Monthly Premium Calculator';
   DOB: any;
-
+  maxDate: any;
+  now: Date=new Date();
   constructor(private service: PremiumCalcService, private toastr: ToastrService) {
+    // this.maxDate={year:new Date().getFullYear(),month: 12, day: 31}
+this.maxDate={year: this.now.getFullYear(), month: this.now.getMonth()+1, day: this.now.getDate()}
     this.service.GetOccupation().subscribe((res: any) => {
-      this.occupations = res.occupations;
-      this.selectedOccupation = this.occupations[0];
+      this.occupations = res.occupations;      
     });
   }
-
+ 
   onSelect(occupationId) {
+    let dte:any;
     if (this.service.formData.UserName == null || this.service.formData.UserName == '') {
       this.toastr.error("Please enter the user name", this.ErrorTitle);
     }
@@ -40,17 +45,19 @@ export class PremiumUserComp implements OnInit {
       this.MonthlyPremiumAmt = null;
     }    
     else {
-      this.service.formData.DOB = this.DOB.month + "/" + this.DOB.day + "/" + this.DOB.year;
+      dte = this.DOB.split('-');
+      this.service.formData.DOB = dte[1] + "/" +dte[0] + "/" + dte[2];
       this.service.formData.occupationId = occupationId;
       this.GetPremiumAmt();
       this.selectedOccupation = this.occupations.find(occ => occ.occupationId == occupationId);
     }
   }
 
+
   GetPremiumAmt() {
     this.service.MonthlyPremiumCalc().subscribe(
       (res: any) => {
-        this.MonthlyPremiumAmt = res.monthlyPremiumAmout;
+        this.MonthlyPremiumAmt =' $' + res.monthlyPremiumAmout + ' cents';
       },
       err => {
         this.MonthlyPremiumAmt = null;
