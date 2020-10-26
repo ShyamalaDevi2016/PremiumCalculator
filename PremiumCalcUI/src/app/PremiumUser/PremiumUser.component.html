@@ -6,18 +6,22 @@
     <div class="col-md-5">
       <form #form="ngForm" autocomplete="off">
         <div class="form-group">
+          <label>Full Name</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text bg-white">
                 <i class="fas fa-user-circle" [class.green-icon]="UserName.valid"
                   [class.red-icon]="UserName.invalid && UserName.touched"></i>
+            
               </div>
             </div>
+           
             <input name="UserName" #UserName="ngModel" [(ngModel)]="service.formData.UserName" class="form-control"
               placeholder="Enter Person Name To Be Insured" required>
           </div>
         </div>
         <div class="form-group">
+          <label>DOB</label>
           <div class="input-group">
             <input class="form-control" placeholder="Enter Date Of Birth" [readonly]="true" name="dp" [(ngModel)]="DOB"
               ngbDatepicker #d="ngbDatepicker"  [minDate]="{year: 1900, month: 1, day: 1}" [maxDate] = "maxDate" required>
@@ -33,6 +37,7 @@
             </div>
       </div>
         <div class="form-group">
+          <label>Death Cover Amt</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text bg-white">
@@ -46,6 +51,7 @@
           </div>
         </div>
         <div class="form-group">
+          <label>Occupations</label>
           <div class="input-group">
             <div class="input-group-prepend">
               <div class="input-group-text bg-white">
