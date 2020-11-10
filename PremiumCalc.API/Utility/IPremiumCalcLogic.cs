@@ -8,7 +8,7 @@ namespace PremiumCalc.API.Utility
     /// <summary>
     /// Interface for premium calculator utility
     /// </summary>
-
+    <test>
     public interface IPremiumCalcLogic
     {
         double MonthlyPremiumCalcForUser(int DeathCoverAmt, int OccupationId, DateTime DOB);

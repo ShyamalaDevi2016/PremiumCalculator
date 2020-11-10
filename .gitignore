@@ -10,3 +10,5 @@
 /PremiumCalc.UnitTests/bin/Debug/netcoreapp2.1
 /PremiumCalc.UnitTests/obj
 /PremiumCalc.Infra/obj/Debug/netcoreapp2.1
+/.vs
+/PremiumCalc.Infra/obj/Release/netcoreapp2.1
